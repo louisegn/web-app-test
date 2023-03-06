@@ -1,4 +1,18 @@
 .App {
   text-align: center;
-  background-color: aquamarine;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  background-color: #72A7F6;
+  border-radius: 10px;
+  height: 77px;
+  width: 88%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin-top: 20px;
 }
