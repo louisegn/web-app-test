@@ -20,6 +20,7 @@
 
 .rubrique {
   border: solid black 1px;
+  background-color: pink;
   border-radius: 10px;
   height: 77px;
   width: 88%;
