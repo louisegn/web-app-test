@@ -27,9 +27,9 @@ const Signup = ({ setUser }) => {
       }
     } catch (error) {
       console.log(error.message);
-      //   if (error.response.status === 409) {
-      //     setErrorMessage("Cet email a déjà un compte");
-      //   }
+      if (error.response.status === 409) {
+        setErrorMessage("Cet email a déjà un compte");
+      }
     }
   };
 
