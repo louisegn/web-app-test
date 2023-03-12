@@ -1,10 +1,31 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+//components
+import Header from "./components/Header/Header";
+
+//views
+import Home from "./views/Home/Home";
+import Signin from "./views/Signin/Signin";
+import Signup from "./views/Singup/Signup";
 
 function App() {
   const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState();
+
+  const [token, setToken] = useState(Cookies.get("COOKIETEST") || null);
+
+  const setUser = (token) => {
+    if (token !== null) {
+      Cookies.set("COOKIETEST", token);
+    } else {
+      Cookies.remove("COOKIETEST");
+    }
+    setToken(token);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,12 +42,25 @@ function App() {
 
   return (
     <div className="App">
-      <div className="header">Time for you</div>
-      <button onClick={() => setRefresh(!refresh)}>BUTTON</button>
-      <div className="rubrique">{data}</div>
-      <div className="rubrique">coucou</div>
-      <div className="rubrique">relax</div>
-      <div className="rubrique">yes</div>
+      <Router>
+        <Header token={token} setUser={setUser} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home data={data} refresh={refresh} setRefresh={setRefresh} />
+            }
+          />
+          <Route
+            path="/user/signup"
+            element={<Signup setUser={setUser} />}
+          ></Route>
+          <Route
+            path="/user/signin"
+            element={<Signin setUser={setUser} />}
+          ></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
